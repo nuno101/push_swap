@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/02/23 16:51:06 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/02/23 17:04:25 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,19 @@ void	init_stack(t_Stack *st, int size)
 	st->top = 0;
 }
 
-int		push(t_Stack *st, int val)
+int		_push(t_Stack *st, int val)
 {
 	st->array[st->top] = val;
 	st->top++;
 	return (val);
 }
 
+int		push(t_Stack *st, int val, char *label)
+{
+	val = _push(st, val);
+	write(1, label, 3);
+	return (val);
+}
 
 int		pop(t_Stack *st)
 {
@@ -96,7 +102,7 @@ int	main(int argc, char **argv)
 			printf("Error: invalid parameter found\n");
 			return(0);
 		}
-		if (val != push(&st, val))
+		if (val != _push(&st, val))
 			printf("Error: inserting value [%d]\n", val);
 		i++;
 	}

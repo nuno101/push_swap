@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:01:38 by nlouro            #+#    #+#             */
-/*   Updated: 2022/02/23 15:45:12 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/02/23 17:06:14 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct	Stack
 }	t_Stack;
 
 void	init_stack(t_Stack *st, int size);
-int		push(t_Stack *st, int val);
+int		_push(t_Stack *st, int val);
+int		push(t_Stack *st, int val, char *label);
 int		pop(t_Stack *st);
 void	sort_stack(t_Stack *s);
