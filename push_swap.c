@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/02/23 12:37:08 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/02/23 16:51:06 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int		is_ordered(t_Stack *s)
 int	main(int argc, char **argv)
 {
 	t_Stack	st;
-	t_Stack	tmp;
 	int		i;
 	int		val;
 
@@ -86,7 +85,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	init_stack(&st, argc - 1);
-	init_stack(&tmp, argc - 1);
 	i = 0;
 	while (i < argc - 1) 
 	{
@@ -114,7 +112,7 @@ int	main(int argc, char **argv)
 		sort_stack(&st);
 		show_stack(&st);
 	}
-	//printf("Pop value: %i\n", pop(&st));
-	//show_stack(&st);
+	free(st.array);
+	//getchar();
 	return (0);
 }
