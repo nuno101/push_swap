@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/02/23 11:49:43 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/02/23 12:37:08 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,31 @@ void	show_stack(t_Stack *st)
 		printf("Stack [%i]: %i\n", i, st->array[i]);
 		i++;
 	}
-	printf("Stack len: %d\n", st->top);
+	//printf("Stack len: %d\n", st->top);
+}
+
+/*
+ * return 0 if stack is_ordered
+ */
+int		is_ordered(t_Stack *s)
+{
+	int i;
+	int	val;
+
+	i = s->top - 1;
+	val = s->array[i];
+	while(i > 0)
+	{
+		i--;
+		if (s->array[i] > val)
+			val = s->array[i];
+		else
+		{
+			i = -1;
+			break;	
+		}
+	}
+	return (i);
 }
 
 int	main(int argc, char **argv)
@@ -78,8 +102,19 @@ int	main(int argc, char **argv)
 			printf("Error: inserting value [%d]\n", val);
 		i++;
 	}
-	show_stack(&st);
-	printf("Pop value: %i\n", pop(&st));
-	show_stack(&st);
+	if (is_ordered(&st) == 0)
+	{
+		show_stack(&st);
+		printf("OK: ordered\n");
+	}
+	else
+	{
+		show_stack(&st);
+		printf("NOK: sorting...\n");
+		sort_stack(&st);
+		show_stack(&st);
+	}
+	//printf("Pop value: %i\n", pop(&st));
+	//show_stack(&st);
 	return (0);
 }
