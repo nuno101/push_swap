@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:01:38 by nlouro            #+#    #+#             */
-/*   Updated: 2022/02/23 17:06:14 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/02/24 09:05:01 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	init_stack(t_Stack *st, int size);
 int		_push(t_Stack *st, int val);
 int		push(t_Stack *st, int val, char *label);
 int		pop(t_Stack *st);
+int		is_ordered(t_Stack *s);
 void	sort_stack(t_Stack *s);

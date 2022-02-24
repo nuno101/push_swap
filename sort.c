@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 12:13:52 by nlouro            #+#    #+#             */
-/*   Updated: 2022/02/23 17:09:17 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/02/24 09:02:29 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,25 @@ void	sort_3(t_Stack *s)
 	free(tmp.array);
 }
 
+/*
+ * sort a stack of 4 elements
+ * 
+ */
+void	sort_4(t_Stack *s)
+{
+	t_Stack tmp;
+
+	init_stack(&tmp, s->top);
+	if (s->array[3] > s->array[2])
+		swap(s, "sa\n");
+
+}
+
 void	sort_stack(t_Stack *s)
 {
-
-	if (s->top == 2)
+	if (is_ordered(s) == 0)
+		printf("OK: stack is ordered. Nothing todo!\n");
+	else if (s->top == 2)
 		swap(s, "sa\n");
 	else if (s->top == 3)
 		sort_3(s);

@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/02/23 17:04:25 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/02/24 09:09:03 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,16 @@ int		pop(t_Stack *st)
 	return (val);
 }
 
+/*
+ * display stack content from top to bottom
+ */
 void	show_stack(t_Stack *st)
 {
 	int i;
 
-	i = 0;
-	while(i < st->top)
-	{
+	i = st->top;
+	while(i-- > 0)
 		printf("Stack [%i]: %i\n", i, st->array[i]);
-		i++;
-	}
-	//printf("Stack len: %d\n", st->top);
 }
 
 /*
@@ -106,18 +105,9 @@ int	main(int argc, char **argv)
 			printf("Error: inserting value [%d]\n", val);
 		i++;
 	}
-	if (is_ordered(&st) == 0)
-	{
-		show_stack(&st);
-		printf("OK: ordered\n");
-	}
-	else
-	{
-		show_stack(&st);
-		printf("NOK: sorting...\n");
-		sort_stack(&st);
-		show_stack(&st);
-	}
+	show_stack(&st);
+	sort_stack(&st);
+	show_stack(&st);
 	free(st.array);
 	//getchar();
 	return (0);
