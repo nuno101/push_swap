@@ -6,7 +6,7 @@
 #    By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/22 14:47:05 by nlouro            #+#    #+#              #
-#    Updated: 2022/02/23 12:22:18 by nlouro           ###   ########.fr        #
+#    Updated: 2022/02/25 16:41:50 by nlouro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ C_FLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = libft
 LIBFT_OBJ = libft.a
 
-C_FILES = push_swap.c sort.c 
+C_FILES = push_swap.c stack_operators.c sort.c utils.c
 
 O_FILES = $(C_FILES:%.c=%.o)
 
