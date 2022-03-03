@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>	 +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2022/02/23 12:13:52 by nlouro			#+#	#+#			 */
-/*   Updated: 2022/02/25 16:42:20 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/03 11:18:35 by nlouro           ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -130,5 +130,8 @@ void	sort_stack(t_Stack *s)
 	else if (s->top == 4)
 		sort_4(s);
 	else
-		printf("TODO\n");
+	{
+		normalise(s);
+		radix_sort(s);
+	}
 }
