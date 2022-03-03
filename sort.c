@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>	 +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2022/02/23 12:13:52 by nlouro			#+#	#+#			 */
-/*   Updated: 2022/03/03 11:18:35 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/03 16:37:46 by nlouro           ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	get_min_pos(t_Stack *s)
 	i = 0;
 	min = s->ar[0];
 	pos = 0;
-	//printf("i %d, pos %d, min: %d\n", i, pos, min);
 	while (i < s->top)
 	{
 		if (s->ar[i] < min)
@@ -56,10 +55,8 @@ int	get_min_pos(t_Stack *s)
 			min = s->ar[i];
 			pos = i;
 		}
-		//printf("i %d, pos %d, min: %d\n", i, pos, min);
 		i++;
 	}
-	//printf("Min pos: %d\n", pos);
 	return (pos);
 }
 
@@ -72,7 +69,6 @@ int	get_max_pos(t_Stack *s)
 	i = 0;
 	val = s->ar[0];
 	pos = 0;
-	//printf("i %d, pos %d, min: %d\n", i, pos, min);
 	while (i < s->top)
 	{
 		if (s->ar[i] > val)
@@ -80,7 +76,6 @@ int	get_max_pos(t_Stack *s)
 			val = s->ar[i];
 			pos = i;
 		}
-		//printf("i %d, pos %d, min: %d\n", i, pos, min);
 		i++;
 	}
 	//printf("Max pos: %d\n", pos);
@@ -132,6 +127,9 @@ void	sort_stack(t_Stack *s)
 	else
 	{
 		normalise(s);
+		printf("Normalised...\n");
+		show_stack(s);
+		printf("...\n");
 		radix_sort(s);
 	}
 }
