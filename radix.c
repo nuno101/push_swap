@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 11:20:53 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/04 14:30:06 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/04 16:53:05 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,9 @@ void	normalise(t_Stack *s)
 		pos = get_min_pos(s);
 		array[pos] = i;
 		s->ar[pos] = INT_MAX;
-		//printf("i: %d, min pos: %d\n", i, pos);
 		i++;
 	}
 	array[max_pos] = i;
-	//printf("i: %d, max pos: %d\n", i, max_pos);
 	free(s->ar);
 	s->ar = array;
 }
@@ -63,13 +61,16 @@ int		base2_bits(int n)
  */
 void	radix_sort(t_Stack *s, t_Stack *tmp, int slen)
 {
-	int		i;
-	int		j;
-	int		k;
+	int	i;
+	int	j;
+	int	k;
+	int	pb;
 
 	i = 0;
 	j = slen - 1;
 	k = 0;
+	pb = 0;
+
 	while (i < base2_bits(slen))
 	{
 		//printf("sorting bit %d\n", i);
@@ -77,16 +78,26 @@ void	radix_sort(t_Stack *s, t_Stack *tmp, int slen)
 		{
 			//printf("j: %d value: %d >> i %d\n", j, s->ar[j], s->ar[j] >> i);
 			if ((s->ar[j] >> i & 1) == 1)
+			{
+				while (pb > 0)
+				{
+					push(tmp, pop(s), "pb\n");
+					pb--;
+				}
 				rotate(s, "ra\n");
+			}
 			else
 			{
-				push(tmp, pop(s), "pb\n");
+				//push(tmp, pop(s), "pb\n");
+				pb++;
 				j--;
 			}
 			k++;
 		}
+		//while (tmp->top > pb)
 		while (tmp->top > 0)
 			push(s, pop(tmp), "pa\n");
+		pb = 0;
 		j = slen - 1;
 		k = 0;
 		i++;

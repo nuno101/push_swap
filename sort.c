@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>	 +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2022/02/23 12:13:52 by nlouro			#+#	#+#			 */
-/*   Updated: 2022/03/04 14:31:40 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/04 16:55:15 by nlouro           ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -141,5 +141,6 @@ void	sort_stack(t_Stack *s)
 		init_stack(&tmp, s->top);
 		slen = s->top;
 		radix_sort(s, &tmp, slen);
+		free(tmp.ar);
 	}
 }
