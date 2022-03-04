@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 11:20:53 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/04 17:17:47 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/05 00:13:26 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,13 @@ void	radix_sort(t_Stack *s, t_Stack *tmp, int slen)
 	int	pb;
 
 	bit = -1;
-	index = slen - 1;
-	i = 0;
-	pb = 0;
-
 	while (bit++ < base2_bits(slen))
 	{
+		i = 0;
+		pb = 0;
+		index = slen - 1;
 		while (i < slen)
 		{
-			//printf("j: %d value: %d >> i %d\n", j, s->ar[j], s->ar[j] >> i);
 			if ((s->ar[index] >> bit & 1) == 1)
 			{
 				while (pb > 0)
@@ -95,8 +93,5 @@ void	radix_sort(t_Stack *s, t_Stack *tmp, int slen)
 		}
 		while (tmp->top > 0)
 			push(s, pop(tmp), "pa\n");
-		pb = 0;
-		index = slen - 1;
-		i = 0;
 	}
 }
