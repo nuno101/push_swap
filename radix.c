@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 11:20:53 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/04 16:53:05 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/04 17:17:47 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,28 @@ int		base2_bits(int n)
 }
 
 /*
- * sort a stack of integers 
- * used for sorting 6+ elements
+ * sort a stack of integers. Used for sorting 6+ elements
+ * determine the bit length of the (normalised) values to sort
+ * cache pb to avoid redundant pb+pa stack operations
  */
 void	radix_sort(t_Stack *s, t_Stack *tmp, int slen)
 {
+	int	bit;
+	int	index;
 	int	i;
-	int	j;
-	int	k;
 	int	pb;
 
+	bit = -1;
+	index = slen - 1;
 	i = 0;
-	j = slen - 1;
-	k = 0;
 	pb = 0;
 
-	while (i < base2_bits(slen))
+	while (bit++ < base2_bits(slen))
 	{
-		//printf("sorting bit %d\n", i);
-		while (k < slen)
+		while (i < slen)
 		{
 			//printf("j: %d value: %d >> i %d\n", j, s->ar[j], s->ar[j] >> i);
-			if ((s->ar[j] >> i & 1) == 1)
+			if ((s->ar[index] >> bit & 1) == 1)
 			{
 				while (pb > 0)
 				{
@@ -88,18 +88,15 @@ void	radix_sort(t_Stack *s, t_Stack *tmp, int slen)
 			}
 			else
 			{
-				//push(tmp, pop(s), "pb\n");
 				pb++;
-				j--;
+				index--;
 			}
-			k++;
+			i++;
 		}
-		//while (tmp->top > pb)
 		while (tmp->top > 0)
 			push(s, pop(tmp), "pa\n");
 		pb = 0;
-		j = slen - 1;
-		k = 0;
-		i++;
+		index = slen - 1;
+		i = 0;
 	}
 }
