@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>	 +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2022/02/23 12:13:52 by nlouro			#+#	#+#			 */
-/*   Updated: 2022/03/04 14:10:42 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/04 14:31:40 by nlouro           ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -116,6 +116,9 @@ void	sort_4(t_Stack *s)
 
 void	sort_stack(t_Stack *s)
 {
+	t_Stack	tmp;
+	int		slen;
+
 	if (is_ordered(s) == 0)
 		printf("OK: stack is ordered. Nothing todo!\n");
 	else if (s->top == 2)
@@ -127,14 +130,16 @@ void	sort_stack(t_Stack *s)
 /*
 	//TODO
 	else if (s->top == 5)
-		sort_4(s);
+		sort_5(s);
 */
 	else
 	{
 		normalise(s);
-		printf("Normalised...\n");
-		show_stack(s);
-		printf("...\n");
-		radix_sort(s);
+		//printf("Normalised...\n");
+		//show_stack(s);
+		//printf("...\n");
+		init_stack(&tmp, s->top);
+		slen = s->top;
+		radix_sort(s, &tmp, slen);
 	}
 }
