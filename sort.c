@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>	 +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2022/02/23 12:13:52 by nlouro			#+#	#+#			 */
-/*   Updated: 2022/03/03 16:37:46 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/04 14:10:42 by nlouro           ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -124,6 +124,11 @@ void	sort_stack(t_Stack *s)
 		sort_3(s);
 	else if (s->top == 4)
 		sort_4(s);
+/*
+	//TODO
+	else if (s->top == 5)
+		sort_4(s);
+*/
 	else
 	{
 		normalise(s);
