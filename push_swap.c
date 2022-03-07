@@ -6,12 +6,16 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/02/25 16:37:20 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/07 17:09:41 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/*
+ * initialise a basic stack structure based on an array 
+ * top property keeps track of the stack next available position/ size 
+ */
 void	init_stack(t_Stack *st, int size)
 {
 	st->ar = malloc(size * sizeof(int));
@@ -19,7 +23,8 @@ void	init_stack(t_Stack *st, int size)
 }
 
 /*
- * TODO: create ft_strict_atoi
+ * validate user input
+ * initialise stack with user input
  */
 int	main(int argc, char **argv)
 {
@@ -27,29 +32,37 @@ int	main(int argc, char **argv)
 	int		i;
 	int		val;
 
-	if (argc < 2)
+	if (argc < 3)
 	{
-		printf("ERROR! Call as: push_swap <integers list>\n");
+		//printf("ERROR! Call as: push_swap <integers list>\n");
+		write(1, "Error\n", 6);
 		return (1);
 	}
 	init_stack(&st, argc - 1);
-	i = 0;
-	while (i < argc - 1)
+	i = 1;
+	while (i < argc)
 	{
-		val = ft_atoi(argv[argc - 1 - i]);
-		//if ((val == 0 && ft_strncmp(argv[i + 1], "0", 2) > 0) || (val == -1 && ft_strncmp(argv[i + 1], "-1", 2) > 0))
-		if (0)
+		if (ft_is_int(argv[argc - i]))
 		{
-			printf("Error: invalid parameter found\n");
-			return (0);
+			val = ft_atoi(argv[argc - i]);
+			if (ft_is_duplicate(argv, argc - i, val))
+			{
+				write(1, "Error\n", 6);
+				exit (0);
+			}
+		}
+		else
+		{
+			write(1, "Error\n", 6);
+			exit (0);
 		}
 		if (val != _push(&st, val))
-			printf("Error: inserting value [%d]\n", val);
+			printf("Error: inserting value [%d]\n", (int) val);
 		i++;
 	}
-	show_stack(&st);
+	//show_stack(&st);
 	sort_stack(&st);
-	show_stack(&st);
+	//show_stack(&st);
 	free(st.ar);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:01:38 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/04 14:26:28 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/07 17:12:03 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 /*
  * ar is stack array
  * top is the position of the next element/ length of the stack array
- *
  */
 typedef struct Stack
 {
@@ -37,6 +36,8 @@ void	rrotate(t_Stack *s, char *label);
 
 void	show_stack(t_Stack *s);
 int		is_ordered(t_Stack *s);
+int		ft_is_int(const char *str);
+int		ft_is_duplicate(char **argv, int i, int val);
 int		get_min_pos(t_Stack *s);
 int		get_max_pos(t_Stack *s);
 
