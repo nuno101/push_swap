@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: nlouro <nlouro@student.42heilbronn.de>	 +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2022/02/23 12:13:52 by nlouro			#+#	#+#			 */
-/*   Updated: 2022/03/04 16:55:15 by nlouro           ###   ########.fr       */
-/*																			*/
+/*                                                    +:+ +:+         +:+     */
+/*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/05 00:32:15 by nlouro            #+#    #+#             */
+/*   Updated: 2022/03/07 14:42:08 by nlouro           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
@@ -84,14 +84,11 @@ int	get_max_pos(t_Stack *s)
 
 /*
  * sort a stack of 4 elements
- * 
  */
-void	sort_4(t_Stack *s)
+void	sort_4(t_Stack *s, t_Stack *tmp)
 {
-	t_Stack	tmp;
 	int		pos;
 
-	init_stack(&tmp, s->top);
 	pos = get_min_pos(s);
 	if (pos <= 1)
 	{
@@ -109,9 +106,38 @@ void	sort_4(t_Stack *s)
 			pos++;
 		}
 	}
-	push(&tmp, pop(s), "pb\n");
+	push(tmp, pop(s), "pb\n");
 	sort_3(s);
-	push(s, pop(&tmp), "pa\n");
+	push(s, pop(tmp), "pa\n");
+}
+
+/*
+ * sort a stack of 5 elements
+ */
+void	sort_5(t_Stack *s, t_Stack *tmp)
+{
+	int		pos;
+
+	pos = get_min_pos(s);
+	if (pos <= 2)
+	{
+		while (pos >= 0)
+		{
+			rrotate(s, "rra\n");
+			pos--;
+		}
+	}
+	else
+	{
+		while (pos < 3)
+		{
+			rotate(s, "ra\n");
+			pos++;
+		}
+	}
+	push(tmp, pop(s), "pb\n");
+	sort_4(s, tmp);
+	push(s, pop(tmp), "pa\n");
 }
 
 void	sort_stack(t_Stack *s)
@@ -119,6 +145,7 @@ void	sort_stack(t_Stack *s)
 	t_Stack	tmp;
 	int		slen;
 
+	init_stack(&tmp, s->top);
 	if (is_ordered(s) == 0)
 		printf("OK: stack is ordered. Nothing todo!\n");
 	else if (s->top == 2)
@@ -126,21 +153,18 @@ void	sort_stack(t_Stack *s)
 	else if (s->top == 3)
 		sort_3(s);
 	else if (s->top == 4)
-		sort_4(s);
-/*
-	//TODO
+		sort_4(s, &tmp);
 	else if (s->top == 5)
-		sort_5(s);
-*/
+		sort_5(s, &tmp);
 	else
 	{
 		normalise(s);
 		//printf("Normalised...\n");
 		//show_stack(s);
 		//printf("...\n");
-		init_stack(&tmp, s->top);
+		//init_stack(&tmp, s->top);
 		slen = s->top;
 		radix_sort(s, &tmp, slen);
-		free(tmp.ar);
 	}
+	free(tmp.ar);
 }
