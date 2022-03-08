@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 15:14:34 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/08 15:21:33 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	swap(t_Stack *s, char *label)
 
 	v = pop(s);
 	t = pop(s);
-	_push(s, v);
-	_push(s, t);
+	push(s, v, "no write");
+	push(s, t, "no write");
 	write(1, label, 3);
 }
 
