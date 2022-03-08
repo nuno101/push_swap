@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 15:14:42 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/08 15:16:50 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	show_stack(t_Stack *st)
  * validate user input
  * initialise stack with user input
  * line 38: printf("ERROR! Call as: push_swap <integers list>\n");
- * line 61: printf("Error: inserting value [%d]\n", (int) val);
  */
 int	main(int argc, char **argv)
 {
