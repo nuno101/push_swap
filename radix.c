@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 11:20:53 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 13:26:54 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/08 15:47:31 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,27 @@ int		base2_bits(int n)
 	return (bits);
 }
 
+void	sort_stack_bits(t_Stack *s, t_Stack *tmp, int index, int bit)
+{
+	int	pb;
+
+	pb = 0;
+	if ((s->ar[index] >> bit & 1) == 1)
+	{
+		while (pb > 0)
+		{
+			push(tmp, pop(s), "pb\n");
+			pb--;
+		}
+		rotate(s, "ra\n");
+	}
+	else
+	{
+		pb++;
+		index--;
+	}
+}
+
 /*
  * sort a stack of integers. Used for sorting 6+ elements
  * determine the bit length of the (normalised) values to sort
@@ -64,30 +85,15 @@ void	radix_sort(t_Stack *s, t_Stack *tmp, int slen)
 	int	bit;
 	int	index;
 	int	i;
-	int	pb;
 
 	bit = -1;
 	while (bit++ < base2_bits(slen))
 	{
 		i = 0;
-		pb = 0;
 		index = slen - 1;
 		while (i < slen)
 		{
-			if ((s->ar[index] >> bit & 1) == 1)
-			{
-				while (pb > 0)
-				{
-					push(tmp, pop(s), "pb\n");
-					pb--;
-				}
-				rotate(s, "ra\n");
-			}
-			else
-			{
-				pb++;
-				index--;
-			}
+			sort_stack_bits(s, tmp, index, bit);
 			i++;
 		}
 		while (tmp->top > 0)
