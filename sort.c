@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 00:32:15 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 15:35:11 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/08 16:32:54 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,20 @@ void	sort_4(t_Stack *s, t_Stack *tmp)
 }
 
 /*
- * sort a stack of 5 elements
+ * try to push the 2 smallest values into the temp stack
+ * if these are the edges of the stack
  */
-void	sort_5(t_Stack *s, t_Stack *tmp)
+int		pre_sort(t_Stack *s, t_Stack *tmp, int pos, int pos2)
 {
-	int	pos;
-	int	pos2;
-	int	min2;
+	int	ra;
 
-	pos = get_min_pos(s);
-	pos2 = get_min2_pos(s, pos);
-	min2 = s->ar[get_min2_pos(s, pos)];
+	ra = 1;
 	if (pos == 4 || pos2 == 4)
+	{
 		push(tmp, pop(s), "pb\n");
+		if (pos == 3 || pos2 == 3)
+			push(tmp, pop(s), "pb\n");
+	}
 	if (pos == 0 || pos2 == 0)
 	{
 		rrotate(s, "rra\n");
@@ -86,52 +87,40 @@ void	sort_5(t_Stack *s, t_Stack *tmp)
 		pos2--;
 		push(tmp, pop(s), "pb\n");
 	}
+	if (pos < 3 && pos2 < 3)
+		ra = 0;
+	return (ra);
+}
+
+/*
+ * sort a stack of 5 elements
+ */
+void	sort_5(t_Stack *s, t_Stack *tmp, int pos, int pos2)
+{
+	int	ra;
+	int	min2;
+
+	min2 = s->ar[get_min2_pos(s, pos)];
+	ra = pre_sort(s, tmp, pos, pos2);
 	if (s->top == 4)
-	{
 		sort_4(s, tmp);
-		push(tmp, pop(s), "pb\n");
-	}
 	else
 	{
 		while (s->top > 3)
 		{
-			if (pos < 3 && pos2 < 3)
+			if (ra == 0)
 				rrotate(s, "rra\n");
 			else
 				rotate(s, "ra\n");
 			if (s->ar[s->top - 1] <= min2)
 				push(tmp, pop(s), "pb\n");
 		}
+		sort_3(s);
+		push(s, pop(tmp), "pa\n");
 	}
-	sort_3(s);
-	push(s, pop(tmp), "pa\n");
 	push(s, pop(tmp), "pa\n");
 	if (is_ordered(s) != 0)
 		swap(s, "sa\n");
-}
-
-/*
- * return 0 if stack is_ordered
- */
-int		is_ordered(t_Stack *s)
-{
-	int	i;
-	int	val;
-
-	i = s->top - 1;
-	val = s->ar[i];
-	while (i > 0)
-	{
-		i--;
-		if (s->ar[i] > val)
-			val = s->ar[i];
-		else
-		{
-			i = -1;
-			break ;
-		}
-	}
-	return (i);
 }
 
 /*
@@ -142,23 +131,26 @@ void	sort_stack(t_Stack *s)
 {
 	t_Stack	tmp;
 	int		slen;
+	int		pos;
+	int		pos2;
 
 	init_stack(&tmp, s->top);
-	if (is_ordered(s) == 0)
-		printf("OK: stack is ordered. Nothing todo!\n");
-	else if (s->top == 2)
+	if (s->top == 2)
 		swap(s, "sa\n");
 	else if (s->top == 3)
 		sort_3(s);
 	else if (s->top == 4)
 		sort_4(s, &tmp);
 	else if (s->top == 5)
-		sort_5(s, &tmp);
+	{
+		pos = get_min_pos(s);
+		pos2 = get_min2_pos(s, pos);
+		sort_5(s, &tmp, pos, pos2);
+	}
 	else
 	{
 		normalise(s);
-		slen = s->top;
-		radix_sort(s, &tmp, slen);
+		radix_sort(s, &tmp, s->top);
 	}
 	free(tmp.ar);
 }

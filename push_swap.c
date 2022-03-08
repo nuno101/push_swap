@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 15:32:43 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/08 16:32:44 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,30 @@ int		validate_args(int argc, char **argv, int i)
 	return (error);
 }
 
+/*
+ * return 0 if stack is_ordered
+ */
+int		is_ordered(t_Stack *s)
+{
+	int	i;
+	int	val;
+
+	i = s->top - 1;
+	val = s->ar[i];
+	while (i > 0)
+	{
+		i--;
+		if (s->ar[i] > val)
+			val = s->ar[i];
+		else
+		{
+			i = -1;
+			break ;
+		}
+	}
+	return (i);
+}
+
 void	raise_error_and_exit(void)
 {
 	write(2, "Error\n", 6);
@@ -60,7 +84,7 @@ void	raise_error_and_exit(void)
 /*
  * validate user input
  * initialise stack with user input
- * line 38: printf("ERROR! Call as: push_swap <integers list>\n");
+ * better output: printf("ERROR! Call as: push_swap <integers list>\n");
  */
 int	main(int argc, char **argv)
 {
@@ -78,7 +102,8 @@ int	main(int argc, char **argv)
 		push(&st, ft_atoi(argv[argc - i]), "no write");
 		i++;
 	}
-	sort_stack(&st);
+	if (is_ordered(&st) != 0)
+		sort_stack(&st);
 	free(st.ar);
 	return (0);
 }
