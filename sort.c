@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 00:32:15 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 13:38:57 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/08 15:35:11 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,7 @@ void	sort_5(t_Stack *s, t_Stack *tmp)
 		pos2--;
 		push(tmp, pop(s), "pb\n");
 	}
-	if (s->top == 3)
-		sort_3(s);
-	else if (s->top == 4)
+	if (s->top == 4)
 	{
 		sort_4(s, tmp);
 		push(tmp, pop(s), "pb\n");
