@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 00:32:15 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 12:21:43 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/08 13:38:57 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,78 +34,6 @@ void	sort_3(t_Stack *s)
 	}
 	else if (s->ar[0] < s->ar[1] && s->ar[1] > s->ar[2] && s->ar[0] < s->ar[2])
 		rrotate(s, "rra\n");
-}
-
-/*
- * find min position
- */
-int	get_min_pos(t_Stack *s)
-{
-	int	i;
-	int	min;
-	int	pos;
-
-	i = 0;
-	min = s->ar[0];
-	pos = 0;
-	while (i < s->top)
-	{
-		if (s->ar[i] < min)
-		{
-			min = s->ar[i];
-			pos = i;
-		}
-		i++;
-	}
-	//printf("Min pos: %d val: %d\n", pos, min);
-	return (pos);
-}
-
-/*
- * find the second  min position
- */
-int	get_min2_pos(t_Stack *s, int pos1)
-{
-	int	i;
-	int	min;
-	int	min2;
-	int	pos;
-
-	i = 0;
-	min = s->ar[pos1];
-	min2 = s->ar[0];
-	pos = 0;
-	while (i < s->top)
-	{
-		if (s->ar[i] != min && s->ar[i] < min2)
-		{
-			min2 = s->ar[i];
-			pos = i;
-		}
-		i++;
-	}
-	return (pos);
-}
-
-int	get_max_pos(t_Stack *s)
-{
-	int	i;
-	int	val;
-	int	pos;
-
-	i = 0;
-	val = s->ar[0];
-	pos = 0;
-	while (i < s->top)
-	{
-		if (s->ar[i] > val)
-		{
-			val = s->ar[i];
-			pos = i;
-		}
-		i++;
-	}
-	return (pos);
 }
 
 /*
@@ -173,7 +101,7 @@ void	sort_5(t_Stack *s, t_Stack *tmp)
 				rrotate(s, "rra\n");
 			else
 				rotate(s, "ra\n");
-			if (s->ar[s->top - 1] <= min2 )
+			if (s->ar[s->top - 1] <= min2)
 				push(tmp, pop(s), "pb\n");
 		}
 	}
@@ -184,6 +112,34 @@ void	sort_5(t_Stack *s, t_Stack *tmp)
 		swap(s, "sa\n");
 }
 
+/*
+ * return 0 if stack is_ordered
+ */
+int		is_ordered(t_Stack *s)
+{
+	int	i;
+	int	val;
+
+	i = s->top - 1;
+	val = s->ar[i];
+	while (i > 0)
+	{
+		i--;
+		if (s->ar[i] > val)
+			val = s->ar[i];
+		else
+		{
+			i = -1;
+			break ;
+		}
+	}
+	return (i);
+}
+
+/*
+ * Sort the stack by calling one of the available sort functions
+ * For debugging: show_stack(s);
+ */
 void	sort_stack(t_Stack *s)
 {
 	t_Stack	tmp;
@@ -203,8 +159,6 @@ void	sort_stack(t_Stack *s)
 	else
 	{
 		normalise(s);
-		//printf("Normalised...\n");
-		//show_stack(s);
 		slen = s->top;
 		radix_sort(s, &tmp, slen);
 	}

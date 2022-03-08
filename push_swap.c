@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/07 17:09:41 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/08 13:36:31 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,22 @@ void	init_stack(t_Stack *st, int size)
 }
 
 /*
+ * display stack content from top to bottom
+ */
+void	show_stack(t_Stack *st)
+{
+	int	i;
+
+	i = st->top;
+	while (i-- > 0)
+		printf("Stack [%i]: %i\n", i, st->ar[i]);
+}
+
+/*
  * validate user input
  * initialise stack with user input
+ * line 38: printf("ERROR! Call as: push_swap <integers list>\n");
+ * line 61: printf("Error: inserting value [%d]\n", (int) val);
  */
 int	main(int argc, char **argv)
 {
@@ -34,8 +48,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 3)
 	{
-		//printf("ERROR! Call as: push_swap <integers list>\n");
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		return (1);
 	}
 	init_stack(&st, argc - 1);
@@ -47,22 +60,20 @@ int	main(int argc, char **argv)
 			val = ft_atoi(argv[argc - i]);
 			if (ft_is_duplicate(argv, argc - i, val))
 			{
-				write(1, "Error\n", 6);
+				write(2, "Error\n", 6);
 				exit (0);
 			}
 		}
 		else
 		{
-			write(1, "Error\n", 6);
+			write(2, "Error\n", 6);
 			exit (0);
 		}
 		if (val != _push(&st, val))
-			printf("Error: inserting value [%d]\n", (int) val);
+			write(2, "Error\n", 6);
 		i++;
 	}
-	//show_stack(&st);
 	sort_stack(&st);
-	//show_stack(&st);
 	free(st.ar);
 	return (0);
 }

@@ -6,12 +6,11 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 11:20:53 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/05 00:13:26 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/08 13:26:54 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-# define INT_MAX 2147483647
 
 /*
  * create a new array with the indexes of each value

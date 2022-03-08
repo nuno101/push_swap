@@ -6,47 +6,11 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/07 17:01:51 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/08 13:38:28 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/*
- * display stack content from top to bottom
- */
-void	show_stack(t_Stack *st)
-{
-	int	i;
-
-	i = st->top;
-	while (i-- > 0)
-		printf("Stack [%i]: %i\n", i, st->ar[i]);
-}
-
-/*
- * return 0 if stack is_ordered
- */
-int	is_ordered(t_Stack *s)
-{
-	int	i;
-	int	val;
-
-	i = s->top - 1;
-	val = s->ar[i];
-	while (i > 0)
-	{
-		i--;
-		if (s->ar[i] > val)
-			val = s->ar[i];
-		else
-		{
-			i = -1;
-			break ;
-		}
-	}
-	return (i);
-}
 
 int		ft_is_int(const char *str)
 {
@@ -88,4 +52,75 @@ int	ft_is_duplicate(char **argv, int i, int val)
 		j++;
 	}
 	return (0);
+}
+
+/*
+ * find min position
+ */
+int	get_min_pos(t_Stack *s)
+{
+	int	i;
+	int	min;
+	int	pos;
+
+	i = 0;
+	min = s->ar[0];
+	pos = 0;
+	while (i < s->top)
+	{
+		if (s->ar[i] < min)
+		{
+			min = s->ar[i];
+			pos = i;
+		}
+		i++;
+	}
+	return (pos);
+}
+
+/*
+ * find the second  min position
+ */
+int	get_min2_pos(t_Stack *s, int pos1)
+{
+	int	i;
+	int	min;
+	int	min2;
+	int	pos;
+
+	i = 0;
+	min = s->ar[pos1];
+	min2 = s->ar[0];
+	pos = 0;
+	while (i < s->top)
+	{
+		if (s->ar[i] != min && s->ar[i] < min2)
+		{
+			min2 = s->ar[i];
+			pos = i;
+		}
+		i++;
+	}
+	return (pos);
+}
+
+int	get_max_pos(t_Stack *s)
+{
+	int	i;
+	int	val;
+	int	pos;
+
+	i = 0;
+	val = s->ar[0];
+	pos = 0;
+	while (i < s->top)
+	{
+		if (s->ar[i] > val)
+		{
+			val = s->ar[i];
+			pos = i;
+		}
+		i++;
+	}
+	return (pos);
 }
