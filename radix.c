@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 11:20:53 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 15:47:31 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/08 19:42:45 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,49 +54,55 @@ int		base2_bits(int n)
 	return (bits);
 }
 
-void	sort_stack_bits(t_Stack *s, t_Stack *tmp, int index, int bit)
+/*
+ * radix sorter code
+ * cache pb to avoid redundant pb+pa stack operations
+ */
+void	sort_stack_bits(t_Stack *s, t_Stack *tmp, int bit, int slen)
 {
+	int	index;
+	int	i;
 	int	pb;
 
+	i = 0;
 	pb = 0;
-	if ((s->ar[index] >> bit & 1) == 1)
+	index = slen - 1;
+	while (i < slen)
 	{
-		while (pb > 0)
+		if ((s->ar[index] >> bit & 1) == 1)
 		{
-			push(tmp, pop(s), "pb\n");
-			pb--;
+			while (pb > 0)
+			{
+				push(tmp, pop(s), "pb\n");
+				pb--;
+			}
+			rotate(s, "ra\n");
 		}
-		rotate(s, "ra\n");
-	}
-	else
-	{
-		pb++;
-		index--;
+		else
+		{
+			pb++;
+			index--;
+		}
+	i++;
 	}
 }
 
 /*
  * sort a stack of integers. Used for sorting 6+ elements
  * determine the bit length of the (normalised) values to sort
- * cache pb to avoid redundant pb+pa stack operations
  */
-void	radix_sort(t_Stack *s, t_Stack *tmp, int slen)
+void	radix_sort(t_Stack *s, t_Stack *tmp)
 {
 	int	bit;
-	int	index;
-	int	i;
+	int slen;
 
-	bit = -1;
-	while (bit++ < base2_bits(slen))
+	bit = 0;
+	slen = s->top;
+	while (bit < base2_bits(slen))
 	{
-		i = 0;
-		index = slen - 1;
-		while (i < slen)
-		{
-			sort_stack_bits(s, tmp, index, bit);
-			i++;
-		}
+		sort_stack_bits(s, tmp, bit, slen);
 		while (tmp->top > 0)
 			push(s, pop(tmp), "pa\n");
+		bit++;
 	}
 }

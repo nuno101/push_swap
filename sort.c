@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 00:32:15 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 16:32:54 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/08 19:39:39 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ void	sort_5(t_Stack *s, t_Stack *tmp, int pos, int pos2)
 void	sort_stack(t_Stack *s)
 {
 	t_Stack	tmp;
-	int		slen;
 	int		pos;
 	int		pos2;
 
@@ -150,7 +149,7 @@ void	sort_stack(t_Stack *s)
 	else
 	{
 		normalise(s);
-		radix_sort(s, &tmp, s->top);
+		radix_sort(s, &tmp);
 	}
 	free(tmp.ar);
 }
