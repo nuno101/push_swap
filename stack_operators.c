@@ -6,23 +6,22 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/02/25 16:41:14 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/08 15:14:34 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	_push(t_Stack *st, int val)
+/*
+ * push is used to load the user inputs into the stack
+ * in that case no pa/pb is written to stdout
+ */
+int	push(t_Stack *st, int val, char *label)
 {
 	st->ar[st->top] = val;
 	st->top++;
-	return (val);
-}
-
-int	push(t_Stack *st, int val, char *label)
-{
-	val = _push(st, val);
-	write(1, label, 3);
+	if (label[0] == 'p')
+		write(1, label, 3);
 	return (val);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 13:36:31 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/08 15:14:42 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ int	main(int argc, char **argv)
 			write(2, "Error\n", 6);
 			exit (0);
 		}
-		if (val != _push(&st, val))
-			write(2, "Error\n", 6);
+		push(&st, val, "no write");
 		i++;
 	}
 	sort_stack(&st);
