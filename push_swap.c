@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/09 13:15:01 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/09 15:44:34 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,28 @@ int	main(int argc, char **argv)
 	t_Stack	st;
 	char	**tmp;
 	int		index;
+	int		i;
 
 	if (argc < 2)
 		raise_error_and_exit();
 	init_stack(&st, argc - 1);
 	if (argc == 2)
 	{
+		//if (ft_strchr(argv[1], ' ') == NULL)
+		//	exit(0);
+		i = 0;
+		while (i < ft_strlen(argv[1]))
+		{
+			if (!(ft_isdigit(argv[1][i]) != 0 || argv[1][i] == '-' || argv[1][i] == ' '))
+			{
+				//printf("%c\n", argv[1][i]); 
+				raise_error_and_exit();
+			}
+			i++;
+		}
 		tmp = ft_split(argv[1], ' ');
+		//if (tmp == NULL)
+		//	raise_error_and_exit();
 		index = 0;
 		while (tmp[index] != NULL)
 			index++;
