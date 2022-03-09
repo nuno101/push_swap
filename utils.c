@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/09 11:51:28 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/09 12:41:17 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	ft_is_int(const char *str)
 			return (0);
 		i++;
 	}
+	if (!ft_isdigit(*(str + i)))
+		return (0);
 	return (1);
 }
 
