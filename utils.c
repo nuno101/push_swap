@@ -6,12 +6,15 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/09 12:41:17 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/09 13:11:26 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/*
+ * based on ft_atoi but stricter
+ */
 int	ft_is_int(const char *str)
 {
 	int		i;
@@ -31,13 +34,11 @@ int	ft_is_int(const char *str)
 	while (ft_isdigit(*(str + i)))
 	{
 		nr = nr * 10 + (*(str + i) - '0');
-		if (sign == 1 && nr > 2147483647)
-			return (0);
-		if (sign == -1 && nr > 2147483648)
+		if ((sign == 1 && nr > 2147483647) || (sign == -1 && nr > 2147483648))
 			return (0);
 		i++;
 	}
-	if (!ft_isdigit(*(str + i)))
+	if (*(str + i) != '\0')
 		return (0);
 	return (1);
 }

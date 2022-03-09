@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/09 11:50:08 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/09 13:15:01 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,34 +51,21 @@ int	validate_args(char **argv, int index)
 	return (error);
 }
 
-/*
- * return 0 if stack is_ordered
- */
-int	is_ordered(t_Stack *s)
-{
-	int	i;
-	int	val;
-
-	i = s->top - 1;
-	val = s->ar[i];
-	while (i > 0)
-	{
-		i--;
-		if (s->ar[i] > val)
-			val = s->ar[i];
-		else
-		{
-			i = -1;
-			break ;
-		}
-	}
-	return (i);
-}
-
 void	raise_error_and_exit(void)
 {
 	write(2, "Error\n", 6);
 	exit (0);
+}
+
+void	validate_and_load_input(t_Stack *st, char **array, int index, int min)
+{
+	while (index >= min)
+	{
+		if (validate_args(array, index) == 1)
+			raise_error_and_exit();
+		push(st, ft_atoi(array[index]), "no write");
+		index--;
+	}
 }
 
 /*
@@ -90,7 +77,7 @@ int	main(int argc, char **argv)
 {
 	t_Stack	st;
 	char	**tmp;
-	int		i;
+	int		index;
 
 	if (argc < 2)
 		raise_error_and_exit();
@@ -98,34 +85,17 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		tmp = ft_split(argv[1], ' ');
-		i = 0;
-		while (tmp[i] != NULL)
-			i++;
-		i--;
-		while (i >= 0)
-		{
-			if (validate_args(tmp, i) == 1)
-				raise_error_and_exit();
-			push(&st, ft_atoi(tmp[i]), "no write");
-			i--;
-		}
+		index = 0;
+		while (tmp[index] != NULL)
+			index++;
+		index--;
+		validate_and_load_input(&st, tmp, index, 0);
 		free(tmp);
 	}
 	else
-	{
-		i = 1;
-		while (i < argc)
-		{
-			if (validate_args(argv, argc - i) == 1)
-				raise_error_and_exit();
-			push(&st, ft_atoi(argv[argc - i]), "no write");
-			i++;
-		}
-	}
-	show_stack(&st);
+		validate_and_load_input(&st, argv, argc - 1, 1);
 	if (is_ordered(&st) != 0)
 		sort_stack(&st);
-	show_stack(&st);
 	free(st.ar);
 	return (0);
 }

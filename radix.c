@@ -6,11 +6,35 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 11:20:53 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/09 11:50:45 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/09 13:14:48 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+/*
+ * return 0 if stack is_ordered
+ */
+int	is_ordered(t_Stack *s)
+{
+	int	i;
+	int	val;
+
+	i = s->top - 1;
+	val = s->ar[i];
+	while (i > 0)
+	{
+		i--;
+		if (s->ar[i] > val)
+			val = s->ar[i];
+		else
+		{
+			i = -1;
+			break ;
+		}
+	}
+	return (i);
+}
 
 /*
  * create a new array with the indexes of each value
