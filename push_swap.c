@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/09 11:46:08 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/09 11:50:08 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	show_stack(t_Stack *st)
 		printf("Stack [%i]: %i\n", i, st->ar[i]);
 }
 
-int		validate_args(char **argv, int index)
+int	validate_args(char **argv, int index)
 {
 	int	error;
 	int	val;
@@ -54,7 +54,7 @@ int		validate_args(char **argv, int index)
 /*
  * return 0 if stack is_ordered
  */
-int		is_ordered(t_Stack *s)
+int	is_ordered(t_Stack *s)
 {
 	int	i;
 	int	val;
@@ -89,7 +89,7 @@ void	raise_error_and_exit(void)
 int	main(int argc, char **argv)
 {
 	t_Stack	st;
-	char **tmp;
+	char	**tmp;
 	int		i;
 
 	if (argc < 2)
@@ -97,7 +97,6 @@ int	main(int argc, char **argv)
 	init_stack(&st, argc - 1);
 	if (argc == 2)
 	{
-		// split the string on " " into an array
 		tmp = ft_split(argv[1], ' ');
 		i = 0;
 		while (tmp[i] != NULL)

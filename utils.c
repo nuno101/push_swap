@@ -6,13 +6,13 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 13:38:28 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/09 11:51:28 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_is_int(const char *str)
+int	ft_is_int(const char *str)
 {
 	int		i;
 	int		sign;

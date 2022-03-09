@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 11:20:53 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 19:42:45 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/09 11:50:45 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	normalise(t_Stack *s)
 /*
  * return the nr of bits required to represent n
  */
-int		base2_bits(int n)
+int	base2_bits(int n)
 {
 	int	bits;
 
@@ -94,7 +94,7 @@ void	sort_stack_bits(t_Stack *s, t_Stack *tmp, int bit, int slen)
 void	radix_sort(t_Stack *s, t_Stack *tmp)
 {
 	int	bit;
-	int slen;
+	int	slen;
 
 	bit = 0;
 	slen = s->top;

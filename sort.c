@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 00:32:15 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 19:39:39 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/09 11:51:09 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	sort_4(t_Stack *s, t_Stack *tmp)
  * try to push the 2 smallest values into the temp stack
  * if these are the edges of the stack
  */
-int		pre_sort(t_Stack *s, t_Stack *tmp, int pos, int pos2)
+int	pre_sort(t_Stack *s, t_Stack *tmp, int pos, int pos2)
 {
 	int	ra;
 
