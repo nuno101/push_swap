@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 16:32:44 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/09 11:46:08 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ void	show_stack(t_Stack *st)
 		printf("Stack [%i]: %i\n", i, st->ar[i]);
 }
 
-int		validate_args(int argc, char **argv, int i)
+int		validate_args(char **argv, int index)
 {
 	int	error;
 	int	val;
 
 	error = 0;
-	if (ft_is_int(argv[argc - i]))
+	if (ft_is_int(argv[index]))
 	{
-		val = ft_atoi(argv[argc - i]);
-		if (ft_is_duplicate(argv, argc - i, val))
+		val = ft_atoi(argv[index]);
+		if (ft_is_duplicate(argv, index, val))
 			error = 1;
 	}
 	else
@@ -89,21 +89,44 @@ void	raise_error_and_exit(void)
 int	main(int argc, char **argv)
 {
 	t_Stack	st;
+	char **tmp;
 	int		i;
 
-	if (argc < 3)
+	if (argc < 2)
 		raise_error_and_exit();
 	init_stack(&st, argc - 1);
-	i = 1;
-	while (i < argc)
+	if (argc == 2)
 	{
-		if (validate_args(argc, argv, i) == 1)
-			raise_error_and_exit();
-		push(&st, ft_atoi(argv[argc - i]), "no write");
-		i++;
+		// split the string on " " into an array
+		tmp = ft_split(argv[1], ' ');
+		i = 0;
+		while (tmp[i] != NULL)
+			i++;
+		i--;
+		while (i >= 0)
+		{
+			if (validate_args(tmp, i) == 1)
+				raise_error_and_exit();
+			push(&st, ft_atoi(tmp[i]), "no write");
+			i--;
+		}
+		free(tmp);
 	}
+	else
+	{
+		i = 1;
+		while (i < argc)
+		{
+			if (validate_args(argv, argc - i) == 1)
+				raise_error_and_exit();
+			push(&st, ft_atoi(argv[argc - i]), "no write");
+			i++;
+		}
+	}
+	show_stack(&st);
 	if (is_ordered(&st) != 0)
 		sort_stack(&st);
+	show_stack(&st);
 	free(st.ar);
 	return (0);
 }
