@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 11:20:53 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/09 13:14:48 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/10 17:19:56 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void	radix_sort(t_Stack *s, t_Stack *tmp)
 	int	bit;
 	int	slen;
 
+	normalise(s);
 	bit = 0;
 	slen = s->top;
 	while (bit < base2_bits(slen))

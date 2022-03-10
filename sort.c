@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 00:32:15 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/09 11:51:09 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/10 17:20:01 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,23 +133,23 @@ void	sort_stack(t_Stack *s)
 	int		pos;
 	int		pos2;
 
-	init_stack(&tmp, s->top);
-	if (s->top == 2)
-		swap(s, "sa\n");
-	else if (s->top == 3)
-		sort_3(s);
-	else if (s->top == 4)
-		sort_4(s, &tmp);
-	else if (s->top == 5)
+	if (is_ordered(s) != 0)
 	{
-		pos = get_min_pos(s);
-		pos2 = get_min2_pos(s, pos);
-		sort_5(s, &tmp, pos, pos2);
+		init_stack(&tmp, s->top);
+		if (s->top == 2)
+			swap(s, "sa\n");
+		else if (s->top == 3)
+			sort_3(s);
+		else if (s->top == 4)
+			sort_4(s, &tmp);
+		else if (s->top == 5)
+		{
+			pos = get_min_pos(s);
+			pos2 = get_min2_pos(s, pos);
+			sort_5(s, &tmp, pos, pos2);
+		}
+		else
+			radix_sort(s, &tmp);
+		free(tmp.ar);
 	}
-	else
-	{
-		normalise(s);
-		radix_sort(s, &tmp);
-	}
-	free(tmp.ar);
 }
