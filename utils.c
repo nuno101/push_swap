@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/09 13:11:26 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/10 16:40:45 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	ft_is_int(const char *str)
 	return (1);
 }
 
-int	ft_is_duplicate(char **argv, int i, int val)
+int	ft_is_duplicate(char **argv, int i, int val, int min)
 {
 	int	j;
 
-	j = 1;
+	j = min;
 	while (j < i)
 	{
 		if (val == ft_atoi(argv[j]))
