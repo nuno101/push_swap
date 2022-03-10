@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:01:38 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/08 19:40:43 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/10 16:05:08 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	rrotate(t_Stack *s, char *label);
 
 int		is_ordered(t_Stack *s);
 int		ft_is_int(const char *str);
-int		ft_is_duplicate(char **argv, int i, int val);
+int		ft_is_duplicate(char **argv, int i, int val, int min);
 int		get_min_pos(t_Stack *s);
 int		get_min2_pos(t_Stack *si, int pos1);
 int		get_max_pos(t_Stack *s);

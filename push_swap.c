@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/09 18:59:07 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/10 16:09:23 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,6 @@ void	show_stack(t_Stack *st)
 		printf("Stack [%i]: %i\n", i, st->ar[i]);
 }
 
-int	validate_args(char **argv, int index)
-{
-	int	error;
-	int	val;
-
-	error = 0;
-	if (ft_is_int(argv[index]))
-	{
-		val = ft_atoi(argv[index]);
-		if (ft_is_duplicate(argv, index, val))
-			error = 1;
-	}
-	else
-		error = 1;
-	return (error);
-}
-
 void	raise_error_and_exit(t_Stack *st)
 {
 	write(2, "Error\n", 6);
@@ -60,12 +43,19 @@ void	raise_error_and_exit(t_Stack *st)
 
 void	validate_and_load_input(t_Stack *st, char **array, int index, int min)
 {
-	//FIXME array[index] showing weird values for identity test_case_9
+	int	error;
+	int	val;
 
+	error = 0;
 	while (index >= min)
 	{
-		//printf("XXX index: %d value: %s\n", index, array[index]);
-		if (validate_args(array, index) == 1)
+		if (ft_is_int(array[index]))
+		{
+			val = ft_atoi(array[index]);
+			if (ft_is_duplicate(array, index, val, min))
+				raise_error_and_exit(st);
+		}
+		else
 			raise_error_and_exit(st);
 		push(st, ft_atoi(array[index]), "no write");
 		index--;
@@ -75,7 +65,6 @@ void	validate_and_load_input(t_Stack *st, char **array, int index, int min)
 /*
  * validate user input
  * initialise stack with user input
- * better output: printf("ERROR! Call as: push_swap <integers list>\n");
  */
 int	main(int argc, char **argv)
 {
@@ -83,7 +72,7 @@ int	main(int argc, char **argv)
 	char	**tmp;
 	int		i;
 
-	init_stack(&st, argc - 1);
+	//init_stack(&st, argc - 1);
 	tmp = NULL;
 	i = 0;
 	if (argc < 2)
@@ -100,14 +89,16 @@ int	main(int argc, char **argv)
 		i = 0;
 		while (tmp[i] != NULL)
 			i++;
-		i--;
-		validate_and_load_input(&st, tmp, i, 0);
+		init_stack(&st, i);
+		validate_and_load_input(&st, tmp, i - 1, 0);
 	}
 	else
+	{
+		init_stack(&st, argc - 1);
 		validate_and_load_input(&st, argv, argc - 1, 1);
+	}
 	if (is_ordered(&st) != 0)
 		sort_stack(&st);
-	//FIXME: causing "pointer being freed was not allocated" error
 	if (tmp != NULL)
 	{
 		while (i >= 0)
