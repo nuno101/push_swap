@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 18:23:34 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/09 16:21:29 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/10 17:43:27 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ static int	count_words(const char *s, char c)
 {
 	int	wc;
 	int	i;
+	int	j;
 
 	wc = 0;
 	i = 0;
 	while (s[i] != '\0')
 	{
+		j = i + 1;
 		if (i == 0 && *(s + i) != c)
 			wc++;
-		else if ((i == 0 || *(s + i) == c) && *(s + i + 1) != c && *(s + i + 1) != '\0')
+		else if ((i == 0 || *(s + i) == c) && *(s + j) != c && *(s + j) != '\0')
 			wc++;
 		else if ((i + 1) == ft_strlen(s) && *(s + i) != c && *(s + i - 1) == c)
 			wc++;

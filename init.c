@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronnde>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 17:39:17 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/10 17:39:56 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/10 17:47:28 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,12 @@ void	init_stack(t_Stack *st, int size)
 {
 	st->ar = malloc(size * sizeof(int));
 	st->top = 0;
+}
+
+/*
+ * alias to comply with norm
+ */
+int		isdgt(int c)
+{
+	return (ft_isdigit(c));
 }
