@@ -6,7 +6,7 @@
 #    By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/22 14:47:05 by nlouro            #+#    #+#              #
-#    Updated: 2022/03/12 16:40:41 by nlouro           ###   ########.fr        #
+#    Updated: 2022/03/12 17:52:34 by nlouro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ all: $(PUSH_SWAP)
 $(PUSH_SWAP): $(O_FILES) $(LIBFT_OBJ)
 	gcc $(C_FLAGS) $(O_FILES) $(LIBFT_DIR)/$(LIBFT_OBJ) -o $(PUSH_SWAP)
 
-$(O_FILES): $(C_FILES) $(LIBFT_OBJ)
+$(O_FILES): $(C_FILES)
 	gcc -c $(C_FLAGS) $(C_FILES) -I$(LIBFT_DIR)
 
 $(LIBFT_OBJ):
