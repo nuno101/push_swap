@@ -6,7 +6,7 @@
 #    By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/22 14:47:05 by nlouro            #+#    #+#              #
-#    Updated: 2022/03/12 17:52:34 by nlouro           ###   ########.fr        #
+#    Updated: 2022/03/12 19:45:42 by nlouro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ LIBFT_OBJ = libft.a
 C_FILES = push_swap.c stack_operators.c sort.c radix.c utils.c init.c
 O_FILES = $(C_FILES:%.c=%.o)
 
+.PHONY: all
 all: $(PUSH_SWAP)
 
 $(PUSH_SWAP): $(O_FILES) $(LIBFT_OBJ)
