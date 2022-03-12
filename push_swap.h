@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:01:38 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/12 17:40:45 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/12 20:28:53 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	radix_sort(t_Stack *s, t_Stack *tmp);
 void	init_stack(t_Stack *st, int size);
 void	show_stack(t_Stack *s);
 void	sort_stack(t_Stack *s);
-void	raise_error_and_exit();
+void	raise_error_and_exit(void);
 int		isdgt(int c);
 
 #endif
