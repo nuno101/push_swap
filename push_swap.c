@@ -6,7 +6,7 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/12 17:36:37 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/12 20:20:51 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	validate_and_load_input(t_Stack *st, char **array, int index, int min)
 {
-	int	error;
 	int	val;
 
-	error = 0;
 	init_stack(st, index + min);
 	while (index >= min)
 	{
@@ -78,10 +76,8 @@ int	main(int argc, char **argv)
 {
 	t_Stack	st;
 	char	**tmp;
-	int		i;
 
 	tmp = NULL;
-	i = 0;
 	if (argc < 2)
 		exit(0);
 	if (argc == 2)
