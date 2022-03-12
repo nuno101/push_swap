@@ -6,11 +6,17 @@
 /*   By: nlouro <nlouro@student.42heilbronnde>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 17:39:17 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/10 17:47:28 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/12 17:36:30 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	raise_error_and_exit()
+{   
+	write(2, "Error\n", 6);
+	exit (0);
+}
 
 /*
  * initialise a basic stack structure based on an array 

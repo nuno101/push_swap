@@ -6,7 +6,7 @@
 #    By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/22 14:47:05 by nlouro            #+#    #+#              #
-#    Updated: 2022/03/10 17:40:18 by nlouro           ###   ########.fr        #
+#    Updated: 2022/03/12 16:40:41 by nlouro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,17 @@ $(LIBFT_OBJ):
 clean:
 	rm -f  $(O_FILES)
 
+cleanl:
+	rm -f  $(O_FILES)
+	make -C $(LIBFT_DIR) clean
+
 fclean: clean
 	rm -f $(PUSH_SWAP)
 
+fcleanl: clean
+	rm -f $(PUSH_SWAP)
+	make -C $(LIBFT_DIR) clean
+
 re: fclean all
+
+rel: fcleanl all

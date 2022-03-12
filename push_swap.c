@@ -6,17 +6,11 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/12 16:30:44 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/12 17:36:37 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	raise_error_and_exit()
-{
-	write(2, "Error\n", 6);
-	exit (0);
-}
 
 void	validate_and_load_input(t_Stack *st, char **array, int index, int min)
 {
@@ -50,7 +44,7 @@ int	array_len(char **tmp)
 	return (i - 1);
 }
 
-void	free_mem(t_Stack *s, char **tmp, int i)
+void	free_mem(char **tmp, int i)
 {
 	if (tmp != NULL)
 	{
@@ -61,7 +55,19 @@ void	free_mem(t_Stack *s, char **tmp, int i)
 		}
 		free(tmp);
 	}
-	free(s->ar);
+}
+
+void	validate_allowed_chars(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (i < ft_strlen(str))
+	{
+		if (!(isdgt(str[i]) != 0 || str[i] == '-' || str[i] == ' '))
+			raise_error_and_exit();
+		i++;
+	}
 }
 
 /*
@@ -77,22 +83,19 @@ int	main(int argc, char **argv)
 	tmp = NULL;
 	i = 0;
 	if (argc < 2)
-		raise_error_and_exit();
-	while (argc == 2 && i < ft_strlen(argv[1]))
-	{
-		if (!(isdgt(argv[1][i]) != 0 || argv[1][i] == '-' || argv[1][i] == ' '))
-			raise_error_and_exit();
-		i++;
-	}
+		exit(0);
 	if (argc == 2)
 	{
+		validate_allowed_chars(argv[1]);
 		tmp = ft_split(argv[1], ' ');
-		i = array_len(tmp);
-		validate_and_load_input(&st, tmp, i, 0);
+		if (tmp[0] == NULL)
+			exit(0);
+		validate_and_load_input(&st, tmp, array_len(tmp), 0);
+		free_mem(tmp, array_len(tmp));
 	}
 	else
 		validate_and_load_input(&st, argv, argc - 1, 1);
 	sort_stack(&st);
-	free_mem(&st, tmp, i);
+	free(st.ar);
 	return (0);
 }
