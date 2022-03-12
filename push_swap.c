@@ -6,16 +6,15 @@
 /*   By: nlouro <nlouro@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:00:31 by nlouro            #+#    #+#             */
-/*   Updated: 2022/03/10 17:40:28 by nlouro           ###   ########.fr       */
+/*   Updated: 2022/03/12 16:30:44 by nlouro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	raise_error_and_exit(t_Stack *st)
+void	raise_error_and_exit()
 {
 	write(2, "Error\n", 6);
-	free(st->ar);
 	exit (0);
 }
 
@@ -32,10 +31,10 @@ void	validate_and_load_input(t_Stack *st, char **array, int index, int min)
 		{
 			val = ft_atoi(array[index]);
 			if (ft_is_duplicate(array, index, val, min))
-				raise_error_and_exit(st);
+				raise_error_and_exit();
 		}
 		else
-			raise_error_and_exit(st);
+			raise_error_and_exit();
 		push(st, ft_atoi(array[index]), "no write");
 		index--;
 	}
@@ -78,11 +77,11 @@ int	main(int argc, char **argv)
 	tmp = NULL;
 	i = 0;
 	if (argc < 2)
-		raise_error_and_exit(&st);
+		raise_error_and_exit();
 	while (argc == 2 && i < ft_strlen(argv[1]))
 	{
 		if (!(isdgt(argv[1][i]) != 0 || argv[1][i] == '-' || argv[1][i] == ' '))
-			raise_error_and_exit(&st);
+			raise_error_and_exit();
 		i++;
 	}
 	if (argc == 2)
